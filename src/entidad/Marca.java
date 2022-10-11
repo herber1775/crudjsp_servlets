@@ -1,29 +1,17 @@
 package entidad;
 
-public class Marca {
+public class Marca{
 
-	private int marca;
-	private String nombre;
-	private String descripcion;
+	private int marc_code;
+	private String marc_nom;
+	private String marc_descri;
 	
-	public int getMarca() {
-		return marca;
+	public Marca(int marc_code, String marc_nom, String marc_descri) {
+		this.marc_code = marc_code;
+		this.marc_nom = marc_nom;
+		this.marc_descri = marc_descri;
 	}
-	public void setMarca(int marca) {
-		this.marca = marca;
-	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public String getDescripcion() {
-		return descripcion;
-	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+	
 	
 	
 }

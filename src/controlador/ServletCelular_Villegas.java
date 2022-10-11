@@ -35,6 +35,8 @@ public class ServletCelular_Villegas extends HttpServlet {
 			listar(request,response);
 		else if(tipo.equals("registrar"))
 			registrar(request,response);
+		else if(tipo.equals("eliminar"))
+			eliminar(request,response);
 	}
 
 	private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,6 +45,13 @@ public class ServletCelular_Villegas extends HttpServlet {
 		request.getRequestDispatcher("listarCelulares.jsp").forward(request,response);
 		
 	}
+	
+	 private void eliminar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	      String dato = request.getParameter("cod");
+	      int codigo = Integer.parseInt(dato);
+	      mv.eliminarEquipo(codigo);
+	      request.getRequestDispatcher("ServletCelular_Villegas?tipo=listar").forward(request, response);
+	   }
 	
 	 private void buscar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	      String dato = request.getParameter("cod");
@@ -56,8 +65,9 @@ public class ServletCelular_Villegas extends HttpServlet {
 		   	Equipo obj = new Equipo();
 		      String nom = request.getParameter("txt_nom");
 		      String desc = request.getParameter("txt_desc");
-		      Date fecha = Date.valueOf(request.getParameter("txt_fecha"));
+		      String fecha = request.getParameter("txt_fecha");
 		      
+		   //   Date fecha = Date.valueOf(request.getParameter("txt_fecha"));
 		      //Date.valueOf(txt_fecha.getText());
 		      
 		      String marca = request.getParameter("cbo_marca");

@@ -38,8 +38,6 @@
          <td><%=e.getNombreMarca()%></td>
          <td><%=e.getNombreModelo()%></td>
          <td colspan="2" align="center"><a
-            href="ServletCelular_Villegas?tipo=buscar&cod=<%=e.getCodigo_equipo()%>"> <img
-               title="Editar" src="img/ic_settings.png"></a> <a
             href="ServletCelular_Villegas?tipo=eliminar&cod=<%=e.getCodigo_equipo()%>"> <img
                title="Eliminar" src="img/ic_close.png"></a></td>
       </tr>

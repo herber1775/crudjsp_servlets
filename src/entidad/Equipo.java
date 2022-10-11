@@ -7,7 +7,7 @@ public class Equipo {
 	private int codigo_equipo;
 	private String nombre;
 	private String descripcion;
-	private Date fechaFabricacion;
+	private String fechaFabricacion;
 	private String nombreMarca;
 	private String nombreModelo;
 	
@@ -29,10 +29,10 @@ public class Equipo {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public Date getFechaFabricacion() {
+	public String getFechaFabricacion() {
 		return fechaFabricacion;
 	}
-	public void setFechaFabricacion(Date fechaFabricacion) {
+	public void setFechaFabricacion(String fechaFabricacion) {
 		this.fechaFabricacion = fechaFabricacion;
 	}
 	public String getNombreMarca() {
@@ -47,6 +47,7 @@ public class Equipo {
 	public void setNombreModelo(String nombreModelo) {
 		this.nombreModelo = nombreModelo;
 	}
+	
 	
 	
 	

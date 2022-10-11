@@ -8,6 +8,6 @@
 </head>
 <body>
 	<a href="ServletCelular_Villegas?tipo=listar">Listar Celulares</a><br>
-	<a href="registrarCelular.jsp">Registrar Nuevo Equipo de Celular</a>
+	<a href="registrarCelulares.jsp">Registrar Nuevo Equipo de Celular</a>
 </body>
 </html>

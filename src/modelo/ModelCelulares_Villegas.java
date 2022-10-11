@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import entidad.Marca;
 import entidad.Equipo;
+import entidad.Marca;
 import entidad.ModeloCell;
 import utils.MysqlDBConexion;
 
@@ -34,7 +34,7 @@ public class ModelCelulares_Villegas {
 			eq.setCodigo_equipo(rs.getInt(1));
 			eq.setNombre(rs.getString(2));
 			eq.setDescripcion(rs.getString(3));
-			eq.setFechaFabricacion(rs.getDate(4));
+			eq.setFechaFabricacion(rs.getString(4));
 			eq.setNombreMarca(rs.getString(5));
 			eq.setNombreModelo(rs.getString(6));
 			datos.add(eq);
@@ -76,7 +76,7 @@ public class ModelCelulares_Villegas {
 				equi.setCodigo_equipo(rs.getInt(1));
 				equi.setNombre(rs.getString(2));
 				equi.setDescripcion(rs.getString(3));
-				equi.setFechaFabricacion(rs.getDate(4));
+				equi.setFechaFabricacion(rs.getString(4));
 				equi.setNombreMarca(rs.getString(5));
 				equi.setNombreModelo(rs.getString(6));			
 			}		
@@ -112,9 +112,10 @@ public class ModelCelulares_Villegas {
 			pstm=cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getDescripcion());
-			pstm.setDate(3, obj.getFechaFabricacion());
+			pstm.setString(3, obj.getFechaFabricacion());
 			pstm.setString(4, obj.getNombreMarca());
 			pstm.setString(5, obj.getNombreModelo());
+			estado = pstm.executeUpdate();
 					
 		}
 		catch (Exception ex) {
@@ -133,5 +134,117 @@ public class ModelCelulares_Villegas {
 	      }
 		
 		return estado;
+	}
+	
+public int eliminarEquipo(int cod) {
+		int estado = -1;
+		Connection cn= null;		
+		PreparedStatement pstm = null;
+		try {		
+			cn=MysqlDBConexion.getConexion();
+			String sql = "delete from tb_equipo where equi_cod=?";	
+			pstm=cn.prepareStatement(sql);
+			pstm.setInt(1, cod);			
+			estado = pstm.executeUpdate();
+					
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		finally {
+	         try {
+	            if (pstm != null)
+	               pstm.close();
+	            if (cn != null)
+	               cn.close();
+	         }
+	         catch (Exception e2) {
+	            e2.printStackTrace();
+	         }
+	      }
+		
+		return estado;
+	}
+	
+	/*
+	 * LISTAR MODELOS
+	 * [{},{}]
+	 * */
+	public List<ModeloCell> listarModelos() {
+		ModeloCell eq = null;
+		List<ModeloCell> datos= new ArrayList<ModeloCell>();
+		Connection cn = null;	
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		try {		
+			cn=MysqlDBConexion.getConexion();
+		
+			String sql = "SELECT * FROM tb_modelo";
+			pstm=cn.prepareStatement(sql);
+			rs = pstm.executeQuery();
+			
+			while(rs.next()) {
+			eq = new ModeloCell();
+			eq.setCodigo(rs.getInt(1));
+			eq.setNombre(rs.getString(2));
+			eq.setDescripcion(rs.getString(3));
+			datos.add(eq);
+				
+			}		
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		finally {
+	         try {
+	            if (rs != null)
+	               rs.close();
+	            if (pstm != null)
+	               pstm.close();
+	            if (cn != null)
+	               cn.close();
+	         }
+	         catch (Exception e2) {
+	            e2.printStackTrace();
+	         }
+	      }
+		return datos;
+	}
+	
+	public List<Marca> getMarcas() {
+		Marca eq = null;
+		List<Marca> datos= new ArrayList<Marca>();
+		Connection cn = null;	
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		try {		
+			cn=MysqlDBConexion.getConexion();
+		
+			String sql = "SELECT * FROM tb_marca";
+			pstm=cn.prepareStatement(sql);
+			rs = pstm.executeQuery();
+			
+			while(rs.next()) {
+				eq=new Marca(rs.getInt(1), rs.getString(2), rs.getString(3));
+				datos.add(eq);
+			}		
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		finally {
+	         try {
+	            if (rs != null)
+	               rs.close();
+	            if (pstm != null)
+	               pstm.close();
+	            if (cn != null)
+	               cn.close();
+	         }
+	         catch (Exception e2) {
+	            e2.printStackTrace();
+	         }
+	      }
+		return datos;
 	}
 }
